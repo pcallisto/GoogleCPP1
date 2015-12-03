@@ -275,7 +275,7 @@ void timesTablesToFile(int maxFactor) {
 int main()
 {
 
-	timesTablesToFile(12);
+	timesTablesToFile(15);
 //  findSquaresThatAddUp();
 //	timeForwardAndBack();
 //	joshinWithPointers();
