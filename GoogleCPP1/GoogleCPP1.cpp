@@ -1,7 +1,6 @@
 // GoogleCPP1.cpp : Defines the entry point for the console application.
 //  https://developers.google.com/edu/c++/next-steps
 
-
 #include "stdafx.h"
 #include <cstdio>
 #include <fstream>
@@ -10,9 +9,7 @@
 #include <sstream>
 #include <cmath>
 
-
 using namespace std;
-
 
 template <typename T> T digitCount(T arg ){
 	int count = { 0 };
@@ -29,7 +26,7 @@ template <typename T> T numeralValue(T &arg) {
 		return stoi(str.str());
 
 	for (int d = 1; d <= digitCount(arg); d++) {
-		value += stoi(str.str().substr(d - 1, 1)); // add 2
+		value += stoi(str.str().substr(d - 1, 1));
 	}
 	if (value > 9)
 		value = numeralValue(value);

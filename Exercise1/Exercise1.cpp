@@ -159,10 +159,10 @@ bool doesItAddUp(double& square, double x, double i) {
 	}
 	return false;
 }
-void findSquaresThatAddUp() {
+void findSquaresThatAddUp(double limit) {
 	const int startingPoint = 1;
 	int x = startingPoint;
-	for (float i = 0.0; i < 3000000.0; ++i) {
+	for (float i = 0.0; i < limit; ++i) {
 		float x = sqrtf(i);
 		if ((int)(x * 1000) % 1000 == 0.0) {
 			double square = (double)i;
@@ -172,12 +172,33 @@ void findSquaresThatAddUp() {
 }
 
 
-int main()
+int main(int argc, char* argv[])
 {
-	findSquaresThatAddUp();
-	timeForwardAndBack();
-	joshinWithPointers();
-	ptrPlay();
+    if (argc < 2) {
+        cout << "Missing arguments!" << endl;
+        return 1;
+    }
+    int option = stoi(argv[1]);
+	switch (option) {
+	case 1:
+	{
+		double limit = stod(argv[2]);
+		findSquaresThatAddUp(limit);
+		break;
+	}
+	case 2:
+		timeForwardAndBack();
+		break;
+	case 3:
+		joshinWithPointers();
+		break;
+	case 4:
+		ptrPlay();
+		break;
+	default:
+		cout << "Goodbye!" << endl;
+		break;
+	}
 
     return 0;
 }
