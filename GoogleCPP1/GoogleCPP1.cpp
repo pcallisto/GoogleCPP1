@@ -198,9 +198,9 @@ template <typename T> T numeralValue(T &arg) {
 
 	return value;
 }
-void getUserInput(int& factor, int& second) {
+void getUserInput(int& first, int& second) {
 	string answer;
-	cout << "Do Times Tables for " << factor << "? " << endl;
+	cout << "Do Times Tables for " << first << "? " << endl;
 	int start, to = {0};
 	
 	do {
@@ -217,8 +217,8 @@ void getUserInput(int& factor, int& second) {
 			to = stoi(answer.substr(commaPos+1, (answer.length()+1)-commaPos) )      ;
 		}
 		else {
-			start = stoi(answer);
-			to = 0;
+			start = 1;
+			to = stoi(answer);
 		}
 		if (start <= 4 && to == 0) {
 			cout << "Seriously bro? " << start << " ? That's it, why bother." << endl;
@@ -235,26 +235,26 @@ void getUserInput(int& factor, int& second) {
 			break;
 		}
 	} while (1);
-	factor = start;
+	first = start;
 	second = to;
 }
-void timesTablesToFile(int maxFactor) {
+void timesTablesToFile(int firstFactor) {
 	ofstream outFile;
 	stringstream stm1,stm2;
-	int second = -1;
+	int secondFactor = -1;
 	int start, to = 0;
-	getUserInput(maxFactor,second);
+	getUserInput(firstFactor,secondFactor);
 	char range[132];
-	if (second != -1) { 
+	if (secondFactor != -1) { 
 		// We are dealing with a range
-		sprintf_s(range, "%d-%d", maxFactor, second);
-		start = maxFactor;
-		to = second;
+		sprintf_s(range, "%d-%d", firstFactor, secondFactor);
+		start = firstFactor;
+		to = secondFactor;
 	}
 	else {
-		sprintf_s(range, "%d", maxFactor);
+		sprintf_s(range, "%d", firstFactor);
 		start = 1;
-		to = maxFactor;
+		to = firstFactor;
 	}
 	char fileName[132];
 	sprintf_s(fileName, "TimesTables%s.txt", range);
