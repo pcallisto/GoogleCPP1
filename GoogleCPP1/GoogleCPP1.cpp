@@ -182,6 +182,7 @@ template <typename T> T digitCount(T arg ){
 		count++;
 	return count;
 }
+//-- for fans of Numerology
 template <typename T> T numeralValue(T &arg) {
 	int value = { 0 };
 	stringstream str;
@@ -197,24 +198,35 @@ template <typename T> T numeralValue(T &arg) {
 
 	return value;
 }
-void getUserInput(int& factor) {
+void getUserInput(int& factor, int& second) {
 	string answer;
 	cout << "Do Times Tables for " << factor << "? " << endl;
-	int tmp = { 0 };
+	int start, to = {0};
+	
 	do {
 		cout << "Enter Y to accept, or N to enter desired number: " << endl;
 		cin >>  answer;
 		if (answer == "Y" || answer == "y")
 			return;
-		cout << "Enter desired number:";
-		cin >> tmp;
-		if (tmp <= 3) {
-			cout << "Seriously bro? " << tmp << " ?";
+		cout << "Enter desired number or range in the form of 'from,to' : ";
+		cin >> answer;
+		int commaPos  = -1;
+		commaPos = answer.find(','); // 34,123   =2
+		if (commaPos != -1) {
+			start = stoi(answer.substr(0, commaPos));
+			to = stoi(answer.substr(commaPos+1, (answer.length()+1)-commaPos) )      ;
+		}
+		else {
+			start = stoi(answer);
+			to = 0;
+		}
+		if (start <= 4 && to == 0) {
+			cout << "Seriously bro? " << start << " ? That's it, why bother." << endl;
 			break;
 		}
-		else if (tmp > 1000) {
+		else if (abs( start - to ) > 1000 ) {
 				char response;
-				cout << "Are you sure you want " << tmp << ", that will be a huge table?(type Y to continue)" << endl;
+				cout << "Are you sure you want " << abs(start-to) << ", that will be a huge table?(type Y to continue)" << endl;
 				cin >> response;
 				if (toupper(response) == 'Y')
 					break;
@@ -223,17 +235,31 @@ void getUserInput(int& factor) {
 			break;
 		}
 	} while (1);
-	factor = tmp;
+	factor = start;
+	second = to;
 }
 void timesTablesToFile(int maxFactor) {
 	ofstream outFile;
 	stringstream stm1,stm2;
-
-	getUserInput(maxFactor);
+	int second = -1;
+	int start, to = 0;
+	getUserInput(maxFactor,second);
+	char range[132];
+	if (second != -1) { 
+		// We are dealing with a range
+		sprintf_s(range, "%d-%d", maxFactor, second);
+		start = maxFactor;
+		to = second;
+	}
+	else {
+		sprintf_s(range, "%d", maxFactor);
+		start = 1;
+		to = maxFactor;
+	}
 	char fileName[132];
-	sprintf_s(fileName, "TimesTables%d.txt", maxFactor,sizeof(fileName));
+	sprintf_s(fileName, "TimesTables%s.txt", range);
 	
-	const int KdigitCount = digitCount(maxFactor);
+	const int KdigitCount = digitCount( abs(start - to) );
 	const int KcolumnWidth = KdigitCount * 2 + 1;
 	outFile.open(fileName, ios::out);
 	if (!outFile.is_open())	{
@@ -243,23 +269,23 @@ void timesTablesToFile(int maxFactor) {
 
 	//stm1 is header1
 	stm1 << std::setfill(' ') << std::setw(KdigitCount) << ' ';
-	for (int a = 1; a <= maxFactor; a++) {
+	for (int a = start; a <= to; a++) {
 		stm1 << std::right << std::setfill(' ') << std::setw(KcolumnWidth+2) << a;
 	}
 	stm1 << endl;
 	//stm2 is header2
 	stm2 << std::setfill(' ') << std::setw(KdigitCount + 2) << '-';
-	for (int d = 1; d <= maxFactor; d++)
+	for (int d = start; d <= to; d++)
 		stm2 << std::right << std::setfill('-') << std::setw(KcolumnWidth+2) << '-';
 	stm2 << endl;
 
 	outFile << stm1.str();
 	outFile << stm2.str();
 
-	for (int c = 1; c <= maxFactor; c++) {
+	for (int c = start; c <= to; c++) {
 		outFile << std::right << std::setfill(' ') << std::setw(KdigitCount) << c << "| ";
 		int data = {0};
-		for (int i = 1; i <= maxFactor; i++) {
+		for (int i = start; i <= to; i++) {
 			data = i*c;
 			outFile << std::right << std::setfill(' ') << std::setw(KcolumnWidth) << data << '|' << numeralValue(data);
 		}
@@ -281,8 +307,8 @@ int main()
 //	joshinWithPointers();
 //  ptrPlay();
 
-	int x555;
-	cin >> x555;
+//	int x555;
+//	cin >> x555;
     return 0;
 }
 
