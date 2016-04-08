@@ -1,4 +1,4 @@
-// GoogleCPP1.cpp : 
+// GoogleCPP1.cpp :
 //  https://developers.google.com/edu/c++/next-steps
 
 #include "stdafx.h"
