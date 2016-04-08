@@ -5,8 +5,6 @@
 #include <sstream>
 #include <cmath>
 
-//#include "UsrLib.h"
-
 using namespace std;
 
 void ptrPlay() {
