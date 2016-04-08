@@ -1,10 +1,12 @@
 // Exercise1.cpp : Defines the entry point for the console application.
 //
-
 #include "stdafx.h"
 #include <iostream>
 #include <sstream>
 #include <cmath>
+
+//#include "UsrLib.h"
+
 
 using namespace std;
 
@@ -169,37 +171,108 @@ void findSquaresThatAddUp(double limit) {
 			doesItAddUp(square, x, i);
 		}
 	}       // we found them at 36(6,1..8) 1225(35,1..49) 41616(204,1..288) 374545(612,1..865) 1.41372E06(1189,1..2258)
+    cout << "That's it." << endl << endl;
 }
 
 
+
+int getInput(int &choice) 
+{
+    Validate_Choice:
+    cout << "You have 4 choices:" << endl;
+    cout << " - 1 - findSquaresThatAddUp" <<endl;
+    cout << " - 2 - timeForwardAndBack" << endl;
+    cout << " - 3 - joshinWithPointers" <<endl;
+    cout << " - 4 - ptrPlay" <<endl;
+    cout << "Choose one of these, or '0' to quit: ";
+        
+    cin >> choice;
+    if (cin.fail())
+    {
+        cout << "You did not make a valid choice, please try again" << endl << endl; 
+        cin.clear();
+        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        goto Validate_Choice;
+    }
+
+    cout << "You entered " << choice << endl;
+
+    int limit = 0;
+    Validate_Limit:
+    if (choice == 1)
+    { 
+        cout << "What is <Upper Limit> for Find Squares function ";
+        cin >> limit;
+
+        if (cin.fail())
+        {
+            cout << "You did not make a valid choice, please try again" << endl << endl;
+            cin.clear();
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            goto Validate_Limit; // didn't wanna put another loop in here so let's <goto> !!
+        }
+    }
+
+    return limit;
+
+    /* snippet from stackoverfloow to look into
+        string input;
+        while (1)
+        {
+            getline(cin, input);
+            stringstream(input) >> x;
+            cout << x << endl;
+        }
+    */
+}
+void doGame(int &option, int &limit)
+{
+    while ( true ) 
+    {
+        switch (option)
+        {
+        case 1:
+            findSquaresThatAddUp(limit);
+            break;
+        case 2:
+            timeForwardAndBack();
+            break;
+        case 3:
+            joshinWithPointers();
+            break;
+        case 4:
+            ptrPlay();
+            break;
+        default:
+            cout << "Thank you, please come again." << endl;
+            return;
+            break;  //we never get a break
+        }
+
+        limit = getInput(option);
+    }
+    return;
+}
+
+//=============================================================================
 int main(int argc, char* argv[])
 {
-    if (argc < 2) {
+    int option,limit = 0;
+
+    if (argc < 2)
+    {
         cout << "Missing arguments!" << endl;
-        return 1;
+        limit = getInput(option);
     }
-    int option = stoi(argv[1]);
-	switch (option) {
-	case 1:
-	{
-		double limit = stod(argv[2]);
-		findSquaresThatAddUp(limit);
-		break;
-	}
-	case 2:
-		timeForwardAndBack();
-		break;
-	case 3:
-		joshinWithPointers();
-		break;
-	case 4:
-		ptrPlay();
-		break;
-	default:
-		cout << "Goodbye!" << endl;
-		break;
-	}
+    else
+    {
+        option = stoi(argv[1]);
+        limit = stoi(argv[2]);
+    }
 
-    return 0;
-}
+    doGame(option, limit);
 
+    cin >> argc ;
+
+    return argc;
+ }
