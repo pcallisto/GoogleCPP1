@@ -42,13 +42,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>c:\boost_1_60_0; C:\DEV\Projects\boost_1_60_0;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\boost_1_60_0\stage\lib;C:\Users\Pietro\Documents\GitHub\GoogleCPP1\x64\Debug; c:\DEV\Projects\boost_1_60_0\stage\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>c:\boost_1_60_0;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\boost_1_60_0\stage\lib;C:\Users\Pietro\Documents\GitHub\GoogleCPP1\x64\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>c:\boost_1_60_0; c:\boost;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\boost_1_60_0\stage\lib;C:\Users\Pietro\Documents\GitHub\GoogleCPP1\x64\Debug; c:\boost\stage\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>c:\boost_1_60_0;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\boost_1_60_0\stage\lib;C:\Users\Pietro\Documents\GitHub\GoogleCPP1\x64\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
