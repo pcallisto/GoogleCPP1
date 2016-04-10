@@ -3,7 +3,6 @@
 #include "Person.h"
 #include "Employee.h"
 
-#include <boost/accumulators/statistics.hpp>
 
 int main()
 {
@@ -36,7 +35,6 @@ int main()
     pp->greet();
 
     delete pp;
-
 
     getchar();
     return 0;
