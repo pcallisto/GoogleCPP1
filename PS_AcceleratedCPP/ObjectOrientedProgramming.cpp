@@ -24,6 +24,29 @@ int main()
     p4.mFirstName = "DefaultyCtorNoPtr";
     
     p4.greet();
+    auto u = [](const Person& p)
+    {
+        cout << p.mFirstName << endl;
+    };
+    u(e);
+
+    Person& pr2 = p;
+    try {
+        Employee& er2 = dynamic_cast<Employee&>(pr2);
+        cout << er2.mDepartment << endl;
+    }
+    catch (const bad_cast& e) // when cast fails on a reference we can catch exception
+    {
+        cout << "Cannot cast this!" << endl;
+    }
+
+    Person* pp2= &p;
+    Employee* ep = dynamic_cast<Employee*>(pp2);
+    if (ep)     // when failure happens with pointer, we can test like so
+        cout << ep->mDepartment << endl;
+    else
+        cout << "Failed to cast pointer" << endl;
+
 
     Person* pp;
     pp = new Person();
