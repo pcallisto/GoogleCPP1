@@ -48,6 +48,30 @@ int main()
         cout << "Failed to cast pointer" << endl;
 
 
+    auto u = [](const Person& p)
+    {
+        cout << p.mFirstName << endl;
+    };
+    u(e);
+
+    Person& pr2 = p;
+    try {
+        Employee& er2 = dynamic_cast<Employee&>(pr2);
+        cout << er2.mDepartment << endl;
+    }
+    catch (const bad_cast& e)
+    {
+        cout << "Cannot cast this!" << endl;
+    }
+
+    Person* pp2= &p;
+    Employee* ep = dynamic_cast<Employee*>(pp2);
+    if (ep)
+        cout << ep->mDepartment << endl;
+    else
+        cout << "Failed to cast pointer" << endl;
+
+
     Person* pp;
     pp = new Person();
     auto* phyAddr = new PhysicalAddress("123", "123rd st", "suite102", "123town", "nv", "usa", "123 321");
@@ -56,6 +80,7 @@ int main()
     pp->mpEAddress = eAddr;
 
     pp->greet();
+
 
     delete pp;
 
