@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include <iostream>
 
-
 void check_path(const char* p)
 {
     path myPath(p);

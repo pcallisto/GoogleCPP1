@@ -3,5 +3,5 @@
 
 struct HotDrinkFactory
 {
-  virtual std::unique_ptr<HotDrink> make() = 0;
+    virtual std::unique_ptr<HotDrink> make() = 0;
 };

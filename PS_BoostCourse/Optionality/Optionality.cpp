@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include <iostream>
 
-
 class Address
 {
 public:

@@ -213,3 +213,6 @@ ModelManifest.xml
 /GoogleCPP1.VC.VC.opendb
 /GoogleCPP1.VC.db
 /GoogleCPP1/TimesTables5-14.txt
+CppExamples/file.txt
+CppExamples/test.file
+CppExamples/test.txt

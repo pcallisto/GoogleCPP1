@@ -6,27 +6,26 @@ class PersonJobBuilder;
 
 class PersonBuilder
 {
-  Person p;
+    Person p;
 protected:
-  Person& person;
-  explicit PersonBuilder(Person& person)
-    : person{ person }
-  {
-  }
+    Person& person;
+    explicit PersonBuilder(Person& person)
+        : person{ person }
+    {
+    }
 public:
-  PersonBuilder() :
-    person{p}
-  {
-    
-  }
+    PersonBuilder() :
+        person{ p }
+    {
+    }
 
-  operator Person()
-  {
-    return std::move(person);
-  }
+    operator Person()
+    {
+        return std::move(person);
+    }
 
-  // builder facets
+    // builder facets
 
-  PersonAddressBuilder lives();
-  PersonJobBuilder works();
+    PersonAddressBuilder lives();
+    PersonJobBuilder works();
 };

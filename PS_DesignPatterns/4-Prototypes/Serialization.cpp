@@ -42,81 +42,78 @@ public:
     virtual ~bus_stop() {}
 };
 
-
 struct Address
 {
-  string street, city;
-  int suite;
+    string street, city;
+    int suite;
 
-
-  friend ostream& operator<<(ostream& os, const Address& obj)
-  {
-    return os
-      << "street: " << obj.street
-      << " city: " << obj.city
-      << " suite: " << obj.suite;
-  }
+    friend ostream& operator<<(ostream& os, const Address& obj)
+    {
+        return os
+            << "street: " << obj.street
+            << " city: " << obj.city
+            << " suite: " << obj.suite;
+    }
 
 private:
-  friend class boost::serialization::access;
+    friend class boost::serialization::access;
 
-  template<class Ar> void serialize(Ar& ar, const unsigned int version)
-  {
-    ar & street;
-    ar & city; 
-    ar & suite;
-  }
+    template<class Ar> void serialize(Ar& ar, const unsigned int version)
+    {
+        ar & street;
+        ar & city;
+        ar & suite;
+    }
 };
 
 struct Contact
 {
-  string name;
-  Address* address;
+    string name;
+    Address* address;
 
-
-  friend ostream& operator<<(ostream& os, const Contact& obj)
-  {
-    return os
-      << "name: " << obj.name
-      << " address: " << *obj.address;
-  }
+    friend ostream& operator<<(ostream& os, const Contact& obj)
+    {
+        return os
+            << "name: " << obj.name
+            << " address: " << *obj.address;
+    }
 private:
-  friend class boost::serialization::access;
+    friend class boost::serialization::access;
 
-  template<class Ar> void serialize(Ar& ar, const unsigned int version)
-  {
-    ar & name;
-    ar & address;
-  }
+    template<class Ar> void serialize(Ar& ar, const unsigned int version)
+    {
+        ar & name;
+        ar & address;
+    }
 };
 
 int main___()
 {
-  Contact john;
-  john.name = "John Doe";
-  john.address = new Address{ "123 East Dr", "London", 123 };
+    Contact john;
+    john.name = "John Doe";
+    john.address = new Address{ "123 East Dr", "London", 123 };
 
-  auto clone = [](Contact c)
-  {
-    ostringstream oss;
-    boost::archive::text_oarchive oa(oss);
-    oa << c;
+    auto clone = [](Contact c)
+    {
+        ostringstream oss;
+        boost::archive::text_oarchive oa(oss);
+        oa << c;
 
-    string s = oss.str();
+        string s = oss.str();
 
-    Contact result;
-    istringstream iss(s);
-    boost::archive::text_iarchive ia(iss);
-    ia >> result;
-    return result;
-  };
-  
-  Contact jane = clone(john);
-  jane.name = "Jane";
-  jane.address->street = "123B West Dr";
+        Contact result;
+        istringstream iss(s);
+        boost::archive::text_iarchive ia(iss);
+        ia >> result;
+        return result;
+    };
 
-  cout << john << endl << jane << endl;
+    Contact jane = clone(john);
+    jane.name = "Jane";
+    jane.address->street = "123B West Dr";
 
-  getchar();
-  return 0;
+    cout << john << endl << jane << endl;
+
+    getchar();
+    return 0;
 }

@@ -5,91 +5,89 @@
 #include <iostream>
 
 namespace html {
-  struct Tag
-  {
-    std::string name;
-    std::string text;
-    std::vector<Tag> children;
-    std::vector<std::pair<std::string, std::string>> attributes;
-
-    friend std::ostream& operator<<(std::ostream& os, const Tag& tag)
+    struct Tag
     {
-      os << "<" << tag.name;
+        std::string name;
+        std::string text;
+        std::vector<Tag> children;
+        std::vector<std::pair<std::string, std::string>> attributes;
 
-      for (const auto& att : tag.attributes)
-        os << " " << att.first << "=\"" << att.second << "\"";
+        friend std::ostream& operator<<(std::ostream& os, const Tag& tag)
+        {
+            os << "<" << tag.name;
 
-      if (tag.children.size() == 0 && tag.text.length() == 0)
-      {
-        os << "/>" << std::endl;
-      } 
-      else
-      {
-        os << ">" << std::endl;
+            for (const auto& att : tag.attributes)
+                os << " " << att.first << "=\"" << att.second << "\"";
 
-        if (tag.text.length())
-          os << tag.text << std::endl;
+            if (tag.children.size() == 0 && tag.text.length() == 0)
+            {
+                os << "/>" << std::endl;
+            }
+            else
+            {
+                os << ">" << std::endl;
 
-        for (const auto& child : tag.children)
-          os << child;
+                if (tag.text.length())
+                    os << tag.text << std::endl;
 
-        os << "</" << tag.name << ">" << std::endl;
-      }
+                for (const auto& child : tag.children)
+                    os << child;
 
-      return os;
-    }
-  protected:
+                os << "</" << tag.name << ">" << std::endl;
+            }
 
-    Tag(const std::string& name, const std::string& text)
-      : name{name},
-        text{text}
+            return os;
+        }
+    protected:
+
+        Tag(const std::string& name, const std::string& text)
+            : name{ name },
+            text{ text }
+        {
+        }
+
+        Tag(const std::string& name, const std::vector<Tag>& children)
+            : name{ name },
+            children{ children }
+        {
+        }
+    };
+
+    struct P : Tag
     {
-    }
+        explicit P(const std::string& text)
+            : Tag("p", text)
+        {
+        }
 
+        P(std::initializer_list<Tag> children)
+            : Tag("p", children)
+        {
+        }
+    };
 
-    Tag(const std::string& name, const std::vector<Tag>& children)
-      : name{name},
-        children{children}
+    struct IMG : Tag
     {
-    }
-  };
-
-  struct P : Tag
-  {
-    explicit P(const std::string& text)
-      : Tag("p", text)
-    {
-    }
-
-    P(std::initializer_list<Tag> children)
-      : Tag("p", children)
-    {
-    }
-    
-  };
-
-  struct IMG : Tag
-  {
-    explicit IMG(const std::string& url)
-      : Tag("img", "")
-    {
-      attributes.emplace_back(make_pair("src", url));
-    }
-  };
+        explicit IMG(const std::string& url)
+            : Tag("img", "")
+        {
+            attributes.emplace_back(make_pair("src", url));
+        }
+    };
 }
 
 int main1()
 {
-  using namespace html;
+    using namespace html;
 
-  std::cout <<
+    std::cout <<
 
-    P {
-      IMG {"http://pokemon.com/pikachu.png"}
+        P{
+          IMG {"http://pokemon.com/pikachu.png"}
     }
 
     << std::endl;
 
-  getchar();
-  return 0;
+    getchar();
+    return 0;
 }

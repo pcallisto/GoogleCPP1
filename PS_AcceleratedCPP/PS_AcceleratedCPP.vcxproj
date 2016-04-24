@@ -154,6 +154,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="info.txt" />
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -162,16 +163,28 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="algorithms.cpp" />
+    <ClCompile Include="containers.cpp" />
+    <ClCompile Include="ControlFlow.cpp" />
+    <ClCompile Include="FunctionsAndVariables.cpp" />
+    <ClCompile Include="MemoryManagement.cpp" />
+    <ClCompile Include="numerics.cpp" />
     <ClCompile Include="ObjectOrientedProgramming.cpp" />
+    <ClCompile Include="PS_AcceleratedCPP.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="streams.cpp" />
+    <ClCompile Include="Templates.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="PS_AcceleratedCPP.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PS_AcceleratedCPP.vcxproj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

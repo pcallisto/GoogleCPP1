@@ -3,28 +3,28 @@
 
 class PersonJobBuilder : public PersonBuilder
 {
-  typedef PersonJobBuilder Self;
+    typedef PersonJobBuilder Self;
 public:
-  explicit PersonJobBuilder(Person& person)
-    : PersonBuilder{ person }
-  {
-  }
+    explicit PersonJobBuilder(Person& person)
+        : PersonBuilder{ person }
+    {
+    }
 
-  Self& at(std::string company_name)
-  {
-    person.company_name = company_name;
-    return *this;
-  }
+    Self& at(std::string company_name)
+    {
+        person.company_name = company_name;
+        return *this;
+    }
 
-  Self& as_a(std::string position)
-  {
-    person.position = position;
-    return *this;
-  }
+    Self& as_a(std::string position)
+    {
+        person.position = position;
+        return *this;
+    }
 
-  Self& earning(double annual_income)
-  {
-    person.annual_income = static_cast<int>(annual_income);
-    return *this;
-  }
+    Self& earning(double annual_income)
+    {
+        person.annual_income = static_cast<int>(annual_income);
+        return *this;
+    }
 };

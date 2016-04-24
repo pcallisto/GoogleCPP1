@@ -1,6 +1,5 @@
 #include "stdafx.h"
 
-
 class MyTokenizer
 {
 public:
